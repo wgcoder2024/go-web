@@ -38,6 +38,29 @@ func main() {
 			users.PUT("/:id", handlers.UpdateUser)
 			users.DELETE("/:id", handlers.DeleteUser)
 		}
+
+		// 数据库表管理路由
+		tables := v1.Group("/tables")
+		{
+			tables.GET("", handlers.GetTables)
+			tables.GET("/:name", handlers.GetTableDetails)
+			tables.POST("", handlers.CreateTable)
+			tables.DELETE("/:name", handlers.DeleteTable)
+
+			// 新增路由
+			tables.PUT("/:name", handlers.AlterTable)
+			tables.GET("/:name/data", handlers.GetTableData)
+			tables.POST("/query", handlers.ExecuteSQL)
+			tables.GET("/:name/export", handlers.ExportTable)
+			tables.POST("/import", handlers.ImportTable)
+		}
+
+		redis := v1.Group("/redis")
+		{
+			redis.GET("/keys", handlers.GetRedisKeys)
+			redis.POST("/keys", handlers.SetRedisKey)
+			redis.DELETE("/keys/:key", handlers.DeleteRedisKey)
+		}
 	}
 
 	// 启动服务器

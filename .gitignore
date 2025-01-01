@@ -1,7 +1,9 @@
-# 配置文件
-backend/config/config.yaml
+# IDE
+.idea/
+.vscode/
 
-# 其他常见忽略项
+# Go
+/backend/tmp
 *.exe
 *.exe~
 *.dll
@@ -9,21 +11,23 @@ backend/config/config.yaml
 *.dylib
 *.test
 *.out
-.env
 
-# IDE 文件
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# 依赖目录
-node_modules/
-vendor/
-
-# 日志文件
-*.log
-
-# 系统文件
+# Vue
 .DS_Store
-Thumbs.db 
+node_modules
+/dist
+/frontend/go-web-frontend/dist
+
+# local env files
+.env.local
+.env.*.local
+*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Config files
+/backend/config/config.yaml 

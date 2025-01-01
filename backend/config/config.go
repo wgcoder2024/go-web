@@ -31,7 +31,32 @@ type Config struct {
 		Params   string `yaml:"params"`
 	} `yaml:"database"`
 
+	Redis struct {
+		Mode    string        `yaml:"mode"`
+		Single  SingleConfig  `yaml:"single"`
+		Cluster ClusterConfig `yaml:"cluster"`
+	} `yaml:"redis"`
+
 	mu sync.RWMutex
+}
+
+type RedisConfig struct {
+	Mode    string        `yaml:"mode"`
+	Single  SingleConfig  `yaml:"single"`
+	Cluster ClusterConfig `yaml:"cluster"`
+}
+
+type SingleConfig struct {
+	Host     string `yaml:"host"`
+	Port     int    `yaml:"port"`
+	Password string `yaml:"password"`
+	DB       int    `yaml:"db"`
+}
+
+type ClusterConfig struct {
+	Addrs    []string `yaml:"addrs"`
+	Password string   `yaml:"password"`
+	ReadOnly bool     `yaml:"read_only"`
 }
 
 var (
