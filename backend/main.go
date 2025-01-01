@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/wgcoder2024/go-web/backend/config"
 	"github.com/wgcoder2024/go-web/backend/handlers"
 
@@ -9,6 +11,8 @@ import (
 )
 
 func main() {
+	cfg := config.GetConfig()
+
 	// 初始化数据库
 	config.InitDB()
 
@@ -17,9 +21,9 @@ func main() {
 
 	// CORS 配置
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:5173"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders:     []string{"Origin", "Content-Type"},
+		AllowOrigins:     cfg.Server.Cors.AllowedOrigins,
+		AllowMethods:     cfg.Server.Cors.AllowedMethods,
+		AllowHeaders:     cfg.Server.Cors.AllowedHeaders,
 		AllowCredentials: true,
 	}))
 
@@ -37,5 +41,6 @@ func main() {
 	}
 
 	// 启动服务器
-	r.Run(":8080")
+	port := fmt.Sprintf(":%d", cfg.Server.Port)
+	r.Run(port)
 }

@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  cors:
+    allowed_origins:
+      - "http://localhost:5173"
+    allowed_methods:
+      - "GET"
+      - "POST"
+      - "PUT"
+      - "DELETE"
+    allowed_headers:
+      - "Origin"
+      - "Content-Type"
+
+database:
+  driver: mysql
+  host: 127.0.0.1
+  port: 3306
+  username: your_username
+  password: your_password
+  dbname: go_web
+  params: charset=utf8mb4&parseTime=True&loc=Local 
